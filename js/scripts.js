@@ -32,17 +32,35 @@ const saveTodo = (text) => {
 
   todoList.appendChild(todo);
 
-    todoInput.value = "";
-    todoInput.focus();  
+  todoInput.value = "";
+  todoInput.focus();
 };
 
 // Eventos
 todoForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-  
-    const inputValue = todoInput.value;
-  
-    if (inputValue) {
-      saveTodo(inputValue);
-    }
-  });
+  e.preventDefault();
+
+  const inputValue = todoInput.value;
+
+  if (inputValue) {
+    saveTodo(inputValue);
+  }
+});
+
+document.addEventListener("click", (e) => {
+  const targetEl = e.target;
+  const parentEl = targetEl.closest("div");
+
+// Acrescentar
+  if (targetEl.classList.contains("finish-todo")) {
+    parentEl.classList.toggle("done");
+  }
+// Remover
+  if(targetEl.classList.contains("remove-todo")){
+    parentEl.remove();
+  }
+// Editar
+  if(targetEl.classList.contains("edit-todo")){
+    parentEl.remove();
+  }
+});
